@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Scan - Smart Wallet</title>
+    <title>Login - Smart Wallet</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="<?= base_url('vendors/feather/feather.css') ?>">
     <link rel="stylesheet" href="<?= base_url('vendors/ti-icons/css/themify-icons.css') ?>">
@@ -35,17 +35,26 @@
                                 <img src="<?= base_url('images/rfid-img.png') ?>" alt="id_card" class="img-fluid" width="250">
                             </div>
                             <h4 class="text-center">Halo, Selamat Datang!</h4>
-                            <h6 class="font-weight-light text-center">Scan ID Card Anda Untuk Melanjutkan.</h6>
-                            <form class="pt-3" method="post" action="<?= base_url('home/smartwallet') ?>">
+                            <h6 class="font-weight-light text-center">Masukkan NIS dan PIN Anda Untuk Melanjutkan.</h6>
+                            <?php if (session()->getFlashdata('error')) : ?>
+                                <div class="alert alert-danger" role="alert">
+                                    <?= session()->getFlashdata('error') ?>
+                                </div>
+                            <?php endif; ?>
+                            <form class="pt-3" method="post" action="<?= base_url('home/smartwallet2') ?>">
                                 <div class="form-group">
-                                    <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Scan ID Card" name="rfid" autofocus required>
+                                    <input type="nis" class="form-control form-control-lg" placeholder="NIS" name="nis" autofocus required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="PIN" name="pin" required>
                                 </div>
                                 <div class="mt-3">
                                     <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" hidden>SCAN</a>
                                 </div>
+                                <button type="submit" class="btn btn-block btn-primary">LOGIN</button>
                             </form>
-                            <h6 class="font-weight-light text-center">atau</h6>
-                            <h4 class="text-center">Login dengan <a class="text-primary" href="<?= base_url('home/login') ?>" target="_blank">Akun</a></h4>
+                            <h6 class="font-weight-light text-center mt-3">atau</h6>
+                            <h4 class="text-center">Login dengan <a class="text-primary" href="<?= base_url('home/index') ?>" target="_blank">Scan ID Card</a></h4>
                         </div>
                     </div>
                 </div>
@@ -71,20 +80,30 @@
     <script>
         let siswa = <?= json_encode($siswa) ?>;
 
-        let rfids = [];
+        let nis = [];
         for (let i = 0; i < siswa.length; i++) {
-            rfids.push(siswa[i].rfid);
+            nis.push(siswa[i].nis);
         }
-        // console.log(rfids);
 
-        let input = document.querySelector('input[name="rfid"]');
-        setInterval(() => {
-            if (!rfids.includes(input.value)) {
-                document.querySelector('a.btn-block').classList.add('disabled');
-            } else {
-                document.querySelector('a.btn-block').classList.remove('disabled');
-            }
-        }, 100);
+        let tanggal_lahir = [];
+        for (let i = 0; i < siswa.length; i++) {
+            tanggal_lahir.push(siswa[i].tanggal_lahir);
+        }
+
+        let day = [];
+        let month = [];
+        let year = [];
+        for (let i = 0; i < tanggal_lahir.length; i++) {
+            day.push(tanggal_lahir[i].split('-')[2]);
+            month.push(tanggal_lahir[i].split('-')[1]);
+            year.push(tanggal_lahir[i].split('-')[0]);
+        }
+
+        let pin = [];
+        for (let i = 0; i < day.length; i++) {
+            pin.push(day[i] + month[i] + year[i]);
+        }
+        console.log(pin);
     </script>
 </body>
 

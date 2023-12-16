@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Smart Wallet</title>
+    <title>Balance - Smart Wallet</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="<?= base_url('vendors/feather/feather.css') ?>">
     <link rel="stylesheet" href="<?= base_url('vendors/ti-icons/css/themify-icons.css') ?>">
@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="<?= base_url('css/vertical-layout-light/style.css') ?>">
     <!-- endinject -->
     <link rel="shortcut icon" href="<?= base_url('images/favicon.png') ?>" />
+    <link rel="stylesheet" href="<?= base_url('css/all.min.css') ?>">
 </head>
 
 <body>
@@ -28,9 +29,12 @@
                         <div class="auth-form-light text-left py-5 pl-5 pr-3">
                             <div class="container brand-logo">
                                 <!-- <img src="<?= base_url('images/logo.svg') ?>" alt="logo"> -->
-                                <h3 class="text-primary font-weight-bold">Smart Wallet</h3>
+                                <h3 class="text-primary font-weight-bold text-center">Smart Wallet</h3>
                             </div>
                             <div class="container row">
+                                <div class="col-md-12 align-self-end">
+                                    <h6 class="font-weight-bold text-right"><a class="text-primary" href="<?= base_url('home/account_settings') ?>" target="_blank"><i class="fas fa-gear fa-spin"></i> Settings</a></h6>
+                                </div>
                                 <div class="col-md-6">
                                     <h5>Selamat Datang, <span class="font-weight-bold"><?= $siswa['nama_siswa'] ?></span></h5>
                                     <h6 class="font-weight-light">No. ID Card : <span id="show_id_card" class="btn btn-sm btn-primary">Lihat ID Card</span></h6>
@@ -55,7 +59,7 @@
                                 </table>
                             </div>
                             <div class="mt-3 text-center">
-                                <a class="btn btn-primary btn-md font-weight-medium auth-form-btn" href="<?= base_url('home/index') ?>">KELUAR</a>
+                                <a class="btn btn-primary btn-md font-weight-medium auth-form-btn" href="<?= base_url('home/logout') ?>">KELUAR</a>
                             </div>
                         </div>
                     </div>
@@ -76,6 +80,7 @@
         <script src="<?= base_url('js/template.js') ?>"></script>
         <script src="<?= base_url('js/settings.js') ?>"></script>
         <script src="<?= base_url('js/todolist.js') ?>"></script>
+        <script src="<?= base_url('js/all.min.js') ?>"></script>
         <!-- endinject -->
         <script>
             let pemasukan = <?= json_encode($pemasukan) ?>;
@@ -161,11 +166,11 @@
 
             // console.log(transaksi);
 
-            $(document).ready(function() {
-                setTimeout(function() {
-                    window.location.href = "<?= base_url('home') ?>";
-                }, 15000);
-            });
+            // $(document).ready(function() {
+            //     setTimeout(function() {
+            //         window.location.href = "<?= base_url('home') ?>";
+            //     }, 15000);
+            // });
 
             let show_id_card = document.querySelector('#show_id_card');
             show_id_card.addEventListener('click', function() {
